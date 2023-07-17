@@ -3,6 +3,7 @@
 
 #include "Character/AuraCharacter.h"
 
+#include "SNegativeActionButton.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/AuraPlayerState.h"
 
@@ -38,6 +39,11 @@ void AAuraCharacter::OnRep_PlayerState()
 void AAuraCharacter::InitAbilityActorInfo()
 {
 	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+
+	if(AuraPlayerState == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Nullptr"));
+	}
 	check(AuraPlayerState);
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
